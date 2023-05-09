@@ -7,9 +7,26 @@
 //
 CTrajectory::CTrajectory()
 {
-	m_iNumOfTrajPoints = 0;
-	m_dLength = 0.0;
-	m_dAverageSpeed = 0.0;
+}
+
+// FUNCTION:	setNumOfTrajPoints 
+// DESCRIPTION: setter function for m_iNumOfTrajPoints
+// INPUT :		iNumPoints - number of tragectory points
+// OUTPUT:		void
+// 
+void CTrajectory::setNumOfTrajPoints(const int iNumPoints)
+{
+	m_iNumOfTrajPoints = iNumPoints;
+}
+
+// FUNCTION:	getNumOfTrajPoints 
+// DESCRIPTION: getter function for m_iNumOfTrajPoints
+// INPUT :		void
+// OUTPUT:		int
+// 
+int CTrajectory::getNumOfTrajPoints() const
+{
+	return m_iNumOfTrajPoints;
 }
 
 // FUNCTION:	addPoint 
@@ -19,8 +36,58 @@ CTrajectory::CTrajectory()
 // 
 void CTrajectory::addPoint(int time, int x, int y)
 {
-	m_mPoints[time] = make_pair(x,y);
+	m_mPoints.emplace(time, std::make_pair(x, y));
 	m_iNumOfTrajPoints++;
+}
+
+// FUNCTION:	getPoints 
+// DESCRIPTION: getter function for m_mPoints
+// INPUT :		void
+// OUTPUT:		std::map<int, std::pair<int, int>>
+// 
+std::map<int, std::pair<int, int>> CTrajectory::getPoints() const
+{
+	return m_mPoints;
+}
+
+// FUNCTION:	setLength 
+// DESCRIPTION: setter function for m_dLength
+// INPUT :		dLen - the length of the tragectory 
+// OUTPUT:		void
+// 
+void CTrajectory::setLength(const double dLen)
+{
+	m_dLength = dLen;
+}
+
+// FUNCTION:	getLength 
+// DESCRIPTION: getter function for m_dLength
+// INPUT :		void
+// OUTPUT:		double
+// 
+double CTrajectory::getLength() const
+{
+	return m_dLength;
+}
+
+// FUNCTION:	setAverageSpeed 
+// DESCRIPTION: setter function for m_dAverageSpeed
+// INPUT :		dSpeed - the speed of the tragectory 
+// OUTPUT:		void
+// 
+void CTrajectory::setAverageSpeed(const double dSpeed)
+{
+	m_dAverageSpeed = dSpeed;
+}
+
+// FUNCTION:	getAverageSpeed 
+// DESCRIPTION: getter function for m_dAverageSpeed
+// INPUT :		void
+// OUTPUT:		double
+// 
+double CTrajectory::getAverageSpeed() const
+{
+	return m_dAverageSpeed;
 }
 
 // FUNCTION:	calculateLength 
@@ -32,12 +99,12 @@ void CTrajectory::calculateLength()
 {
 	m_dLength = 0.0;
 	auto it_Points = m_mPoints.begin();
-	pair<int, int> prevPoint = it_Points->second;
+	std::pair<int, int> prevPoint = it_Points->second;
 	it_Points++;
 
 	for (; it_Points != m_mPoints.end(); it_Points++)
 	{
-		pair<int, int> currentPoint = it_Points->second;
+		std::pair<int, int> currentPoint = it_Points->second;
 		m_dLength += sqrt(pow(currentPoint.first - prevPoint.first, 2) + pow(currentPoint.second - prevPoint.second, 2));
 		prevPoint = currentPoint;
 	}
@@ -48,7 +115,7 @@ void CTrajectory::calculateLength()
 // INPUT :		iTotalTime - total time of the whole trajectory
 // OUTPUT:		void
 // 
-void CTrajectory::calculateAverageSpeed(int iTotalTime)
+void CTrajectory::calculateAverageSpeed(const int iTotalTime)
 {
 	if (iTotalTime == 0)
 	{
@@ -65,10 +132,10 @@ void CTrajectory::calculateAverageSpeed(int iTotalTime)
 // INPUT :		void
 // OUTPUT:		void
 // 
-void CTrajectory::printMap()
+void CTrajectory::printMap() const
 {
-	for (auto it_trajData = m_mPoints.begin(); it_trajData != m_mPoints.end(); it_trajData++)
+	for (const auto& elem : m_mPoints)
 	{
-		cout << it_trajData->first << "  " << it_trajData->second.first << " ; " << it_trajData->second.second << endl;
+		std::cout << elem.first << "  " << elem.second.first << " ; " << elem.second.second << std::endl;
 	}
 }
