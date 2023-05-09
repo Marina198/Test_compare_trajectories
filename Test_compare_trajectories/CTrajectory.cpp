@@ -14,7 +14,7 @@ CTrajectory::CTrajectory()
 // INPUT :		iNumPoints - number of tragectory points
 // OUTPUT:		void
 // 
-void CTrajectory::setNumOfTrajPoints(const int iNumPoints)
+void CTrajectory::setNumOfTrajPoints(int iNumPoints)
 {
 	m_iNumOfTrajPoints = iNumPoints;
 }
@@ -55,7 +55,7 @@ std::map<int, std::pair<int, int>> CTrajectory::getPoints() const
 // INPUT :		dLen - the length of the tragectory 
 // OUTPUT:		void
 // 
-void CTrajectory::setLength(const double dLen)
+void CTrajectory::setLength(double dLen)
 {
 	m_dLength = dLen;
 }
@@ -75,7 +75,7 @@ double CTrajectory::getLength() const
 // INPUT :		dSpeed - the speed of the tragectory 
 // OUTPUT:		void
 // 
-void CTrajectory::setAverageSpeed(const double dSpeed)
+void CTrajectory::setAverageSpeed(double dSpeed)
 {
 	m_dAverageSpeed = dSpeed;
 }
@@ -115,7 +115,7 @@ void CTrajectory::calculateLength()
 // INPUT :		iTotalTime - total time of the whole trajectory
 // OUTPUT:		void
 // 
-void CTrajectory::calculateAverageSpeed(const int iTotalTime)
+void CTrajectory::calculateAverageSpeed(int iTotalTime)
 {
 	if (iTotalTime == 0)
 	{
