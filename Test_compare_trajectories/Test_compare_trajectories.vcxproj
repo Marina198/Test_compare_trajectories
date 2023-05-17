@@ -139,11 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CTrajectory.cpp" />
     <ClCompile Include="Test_compare_trajectories.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CTrajectory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
