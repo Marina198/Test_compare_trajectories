@@ -1,5 +1,4 @@
 ﻿//
-﻿#include <iostream>
 #include <map>
 #include <string_view>
 #include <functional>
@@ -15,6 +14,7 @@
 #include <stdexcept>
 #include <limits>
 #include <variant>
+#include <iostream>
 
 struct Trajectory
 {
@@ -70,14 +70,12 @@ public:
         file_name_ = argv[1];
 
         auto check_metric = [this](char* metric) {
-            auto check_metric = [this](char* metric) {
-                try {
-                    applied_metrics_.emplace_back(metrics_.at(metric));
-                }
-                catch (const std::out_of_range&) {
+            try {
+                applied_metrics_.emplace_back(metrics_.at(metric));
+            }
+            сatch (const std::out_of_range&) {
                     throw std::runtime_error("Unknown metric: " + std::string(metric));
-                }
-            };
+             }
         };
 
         // std::span<char*> vMetrics(argv + 2, argv + argc); // C++20
