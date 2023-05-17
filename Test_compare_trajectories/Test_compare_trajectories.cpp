@@ -70,12 +70,10 @@ public:
         file_name_ = argv[1];
 
         auto check_metric = [this](char* metric) {
-            try {
-                applied_metrics_.emplace_back(metrics_.at(metric));
-            }
-            сatch (const std::out_of_range&) {
-                    throw std::runtime_error("Unknown metric: " + std::string(metric));
-             }
+           if (auto it = metrics_.find(metric); it != metrics_.end())
+               applied_metrics_.emplace_back(*it);
+           else
+               throw std::runtime_error("Unknown metric: " + std::string(metric));
         };
 
         // std::span<char*> vMetrics(argv + 2, argv + argc); // C++20
