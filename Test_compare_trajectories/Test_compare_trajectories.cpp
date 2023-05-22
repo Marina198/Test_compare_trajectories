@@ -7,14 +7,15 @@
 #include <filesystem>
 #include <algorithm>
 #include <iterator>
-#include <unordered_map>
-#include <utility>
+//#include <unordered_map>
+#include <utility>   
 #include <cmath>
-#include <numeric>
+//#include <numeric>
 #include <stdexcept>
-#include <limits>
-#include <variant>
+//#include <limits>
+//#include <variant>
 #include <iostream>
+#include <span>
 
 struct Trajectory
 {
@@ -76,8 +77,8 @@ public:
                throw std::runtime_error("Unknown metric: " + std::string(metric));
         };
 
-        // std::span<char*> vMetrics(argv + 2, argv + argc); // C++20
-        std::vector<char*> vMetrics(argv + 2, argv + argc);
+        std::span<char*> vMetrics(argv + 2, argv + argc); // C++20
+        //std::vector<char*> vMetrics(argv + 2, argv + argc);
 
         for (auto& metric : vMetrics) {
             check_metric(metric);
